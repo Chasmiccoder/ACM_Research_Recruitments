@@ -141,16 +141,21 @@ None
 print( "Testing our Algorithm!" )
 train_size = 10000
 test_size  = 10
-#K = int( train_size ** 0.5 )
-K = 5
+K = int( train_size ** 0.5 )
+#K = 5
 
 X_test = dataset [ len(dataset) - test_size :  ]
 Y_test = classes [ len(classes) - test_size :  ]
-predicted_classes = [ ]
 
 X_train = dataset[ : train_size ]
-Y_train = dataset[ : train_size ]
+Y_train = classes[ : train_size ]
 
+#X_test = dataset[ : test_size ]
+#Y_test = classes[ : test_size ]
+#X_train = dataset[ : train_size ]
+#Y_train = dataset[ : train_size ]
+
+predicted_classes = [ ]
 
 # One Hot Encoding:
 print( "One Hot Encoding Testing Data: " )
