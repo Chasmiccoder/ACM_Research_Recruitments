@@ -413,7 +413,6 @@ print( )
 plain_text = test_run_blank( cipher, new_potential_key )
 print( "Plain Text using New Potential Key: \n", plain_text )
 
-
 """
 Plain Text:
 _llenfelau_teadlluagaln_t the wood and _toneophlllhoy_e and whatever walked there walked alone
