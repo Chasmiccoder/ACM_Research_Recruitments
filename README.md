@@ -2,7 +2,7 @@
 <br>
 Submission by Aryaman M. Kolhe (20BBS0122) for ACM Research Recruitments.
 <br>
-I managed to solve the Computer Vision Challenge. <br>
+
 Challenges Solved: <br>
 1) Computer Vision Challenge <br><br>
 2) ML/DL Classification Challenge - <br><br>
