@@ -89,21 +89,21 @@ img = np.array( cv2.resize(img, (883,498), interpolation = cv2.INTER_NEAREST) )
 print( "Shape of Image 1: ", img.shape )     # (498,  883,  3)
 print( "Shape of Image 2: ", img_2.shape )   # (498,  883,  3)
 
-"""
+
+delimiter = [255,255,255]
 for i in range( len(img_2) ):
     for pixel_index in range( len(img_2[i]) ):
 
-        pixel = img_2[i][pixel_index]
+        pixel_1 = img[i][pixel_index]
+        pixel_2 = img_2[i][pixel_index]
+        temp = pixel_1.tolist( )
 
-        i
-"""
+        if temp != delimiter:
+            pixel_2 = pixel_1 
+            img_2[i][pixel_index] = pixel_2
 
 
-
-
-
-
-cv2.imwrite('opncv_sample.png', img)  
+cv2.imwrite('superposition_2.png', img_2)  
 
 print("Process Complete!")
 
