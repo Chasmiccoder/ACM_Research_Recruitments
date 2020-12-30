@@ -223,6 +223,7 @@ for i in range( test_size ):
         list_of_classes.append( voting_class )
     
     #special_sort( list_of_distances )
+    # Sorting the list of clases according to the list of distances
     list_of_classes = [ x for _,x in sorted( zip( list_of_distances, list_of_classes) ) ]
 
     #K_least_distances = list_of_distances[ : K ]
