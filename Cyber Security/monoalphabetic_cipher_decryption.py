@@ -3,7 +3,18 @@ We need to decrypt the following string:
 ndgzixzgvtnozvydgtvbvdinooczrjjyviynojizjacdggcjpnzviyrcvozqzmrvgfzyoczmzrvgfzyvgjiz 
 
 Decrypted Text:
+_llenfelau_teadlluagaln_t the wood and _toneophlllhoy_e and whatever walked there walked alone
 
+Given More time, we could have completely cracked it...
+Key Cracked so far:
+potential_key =  {'z': 'e', 'v': 'a', 'y': 'd', 'o': 't', 'g':'l',
+'j': 'o', 'i': 'n', 'c': 'h', 'r': 'w', 'd': 'l', 't': 'u', 'm': 'r', 
+'f': 'k', 'x': 'f', 'q': 'v', 'p': 'y', 'b': 'g', 'a': 'p'} 
+
+"""
+
+"""
+Solving the Problem ---
 Given Information:
 Cipher used = Monoalphabetic Cipher
 
@@ -20,6 +31,8 @@ Therefore, to break this code, we can use letter frequency analysis, based on
 the most common letters and words used in English.
 I am using the letter frequency statistics from this website:
 https://www3.nd.edu/~busiforc/handouts/cryptography/letterfrequencies.html
+
+Goto line 221 for Second Approach (which resulted in the answer)
 """
 
 def find_frequency( cipher ):
@@ -348,84 +361,60 @@ new_potential_key =  {'z': 'e', 'v': 'a', 'y': 'i', 'o': 't',
 'j': 'o', 'i': 's', 'n': 'h', 'c': 'h', 'r': 'w', 'd': 'l', 't': 'u', 'm': 'r', 
 'f': 'm', 'x': 'f', 'q': 'v', 'p': 'y', 'b': 'g', 'a': 'p'} # new_potential_key[ 'g' ] = ??
 
+print( )
+plain_text = test_run_blank( cipher, new_potential_key )
+print( "Plain Text using New Potential Key: \n", plain_text )
+
+"""
+Plain Text: 
+hl_esfe_auhteail_uagalshtthewooiasihtoseophl__hoyheasiwhateverwa_meitherewa_meia_ose
+                             *
+wooi = wood
+also realised that both 'c' and 'n' are giving 'h'
+"""
+new_potential_key =  {'z': 'e', 'v': 'a', 'y': 'd', 'o': 't', 
+'j': 'o', 'i': 's', 'c': 'h', 'r': 'w', 'd': 'l', 't': 'u', 'm': 'r', 
+'f': 'm', 'x': 'f', 'q': 'v', 'p': 'y', 'b': 'g', 'a': 'p'} # new_potential_key[ 'g' ] = ??
+                                                            # new_potential_key[ 'n' ] = ??
+
+print( )
+plain_text = test_run_blank( cipher, new_potential_key )
+print( "Plain Text using New Potential Key: \n", plain_text )
+
+"""
+Plain Text:
+hl_esfe_auhteadl_uagalsht the wood asdhtoseophl__hoyheasd whatever wa_med there wa_meda_ose
+                                    *                                         
+Trying 'asd' as 'and'
+replacing 's' with 'n'
+"""
+new_potential_key =  {'z': 'e', 'v': 'a', 'y': 'd', 'o': 't', 
+'j': 'o', 'i': 'n', 'c': 'h', 'r': 'w', 'd': 'l', 't': 'u', 'm': 'r', 
+'f': 'm', 'x': 'f', 'q': 'v', 'p': 'y', 'b': 'g', 'a': 'p'} # new_potential_key[ 'g' ] = ??
+                                                            # new_potential_key[ 'n' ] = ??
 
 
+print( )
+plain_text = test_run_blank( cipher, new_potential_key )
+print( "Plain Text using New Potential Key: \n", plain_text )
 
+"""
+Plain Text:
+_l_enfe_au_teadl_uagaln_t the wood and _toneophl__hoy_e and whatever wa_med there wa_meda_one
 
+wa_med = walked
+replacing '_' with 'l' and 'm' with 'k'
+"""
+new_potential_key =  {'z': 'e', 'v': 'a', 'y': 'd', 'o': 't', 'g':'l',
+'j': 'o', 'i': 'n', 'c': 'h', 'r': 'w', 'd': 'l', 't': 'u', 'm': 'r', 
+'f': 'k', 'x': 'f', 'q': 'v', 'p': 'y', 'b': 'g', 'a': 'p'} # new_potential_key[ 'n' ] = ??
 
-
-
-
-
-
-
-
-
-
-
+print( )
+plain_text = test_run_blank( cipher, new_potential_key )
+print( "Plain Text using New Potential Key: \n", plain_text )
 
 
 """
-After Many Similar Approaches, I could not find the pattern, 
-since the letters kept getting conflicted.
-
-New Approach:
-Apply a dynamic programming style approach for this problem.
-We will use a function f( ), that recursively finds possible keys for this cipher based on the 
-letters using in the cipher, and the letter frequency list (in English)
-Then, we will apply these keys to the cipher, and compare.
-
+Plain Text:
+_llenfelau_teadlluagaln_t the wood and _toneophlllhoy_e and whatever walked there walked alone
 """
-
-"""
-def f( cipher_frequency, letter_frequency, flag ):
-    if len( cipher_frequency ) == 0:
-        return "\n"
-    
-    cipher_letters = list( cipher_frequency.keys() )
-
-    if flag == 0:
-        return cipher_letters[]
-"""
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
