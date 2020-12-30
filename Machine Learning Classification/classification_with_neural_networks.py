@@ -118,12 +118,5 @@ loss, acc = model.evaluate( X_test, y_test, verbose=0 )
 print( "Model Accuracy: %.4f"%acc )
 # Varying from 93 to 96%. Max Accuracy seen: 98.48%
 
-"""
-
-Add section for Visualising the Deep Learning Model
-Add section for Pickling (Saving and Loading Model)
-
-"""
-
 end_time = time.time()
 print( "Run Time: ", end_time - start_time )

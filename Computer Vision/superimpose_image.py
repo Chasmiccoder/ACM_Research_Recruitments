@@ -106,15 +106,3 @@ for i in range( len(img_2) ):
 cv2.imwrite('superposition_2.png', img_2)  
 
 print("Process Complete!")
-
-
-
-
-
-
-
-
-
-
-
-

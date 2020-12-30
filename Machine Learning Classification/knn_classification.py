@@ -93,6 +93,9 @@ def euclidean_distance( point1, point2 ):
 
 
 def special_sort( d ):
+    """
+    Sorts the array d according to the first value of each pair.
+    """
     n = len( d )
     
     for i in range( n-1 ):
@@ -187,11 +190,6 @@ Y_test = classes [ len(classes) - test_size :  ]
 X_train = dataset[ : train_size ]
 Y_train = classes[ : train_size ]
 
-#X_test = dataset[ : test_size ]
-#Y_test = classes[ : test_size ]
-#X_train = dataset[ : train_size ]
-#Y_train = classes[ : train_size ]
-
 predicted_classes = [ ]
 
 # One Hot Encoding:
@@ -270,14 +268,6 @@ Since these are arbitrary numbers, to prevent the model from getting confused, w
 employ One Hot Encoding. 
 For example: If the datapoint's start station is not equal to 31020, then the value under 
 start_station_31020 column will be 0. Else it will be 1. 
-
-# One Hot Encoding:
-dataset = one_hot_encoding( dataset, start_station, 1 )
-print( "Done encoding Start Station!" )
-dataset = one_hot_encoding( dataset, end_station, 2 )
-print( "Done encoding End Station!" )
-dataset = one_hot_encoding( dataset, bike_numbers, 3 )
-print( "Done encoding Bike Numbers!" )
 
 """
 
