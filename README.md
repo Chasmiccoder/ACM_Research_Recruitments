@@ -8,7 +8,6 @@ Challenges Solved: <br>
 2) ML/DL Classification Challenge - <br>
     a) Using KNN Algorithm with no ML Libraries <br>
     b) Using MultiLayer Perceptron <br>
-
 3) Cyber Security / Cryptography - <br>
 I managed to crack about 40% of the cipher, using letter frequency analysis. <br> 
 
