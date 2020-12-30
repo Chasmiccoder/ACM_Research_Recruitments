@@ -3,16 +3,18 @@ Since this is a binary classification, use Logistic Regression
 """
 
 import time 
+import csv
+import random 
+
 start_time = time.time()
 
-import csv
 
 def check( ):
     print( ".", end='' )
 
 
-def print_progress_bar( test_size ):
-    print( " " * test_size, end='' )
+def print_progress_bar( size ):
+    print( " " * size, end='' )
     print( "<-Needs to Reach Here" )
 
 
@@ -97,6 +99,27 @@ def special_sort( d ):
                 d[ j ][ 1 ], d[ j+1 ][ 1 ] = d[ j+1 ][ 1 ], d[ j ][ 1 ]
 
 
+def shuffle_dataset( dataset, datapoints ):
+    new_dataset = [ ]
+
+    progress = datapoints / 20   # Simple meter to see how much data has been shuffled
+    i = 1
+
+    print_progress_bar( progress )
+    check( )
+    while( datapoints > len(new_dataset)  ):
+        r = random.randint( 0, len(dataset) )
+        new_dataset.append( dataset[ r ] )
+        dataset = dataset[ : r ] + dataset[ r+1 : ]
+
+        if len(new_dataset) == progress * i:
+            check( )
+            i += 1
+
+    return new_dataset
+
+
+"""---MAIN---""" 
 csv_file   = open( "Bike_Data.csv" )
 csv_reader = csv.reader( csv_file, delimiter = ',' )
 
@@ -113,9 +136,10 @@ for row in csv_reader:
         dataset.append( row )
         line_count += 1 
 
-print("Passed Check 1" )
+print( "Dataset successfully incorporated!" )
 
 dataset, classes, bike_numbers, start_station, end_station = data_prepocessing ( dataset )
+print( "Data Preprocessing completed successfully!" )
 
 print( "Start Stations: ", len(start_station) )
 print( "End Stations: ", len(end_station) )
@@ -135,12 +159,22 @@ for i in range( 0, 3 ):
     print( "Class: ", classes[ i ] )
 
 # Implement some sort of shuffle here (on dataset):
-None 
+print( "Shuffling Dataset: " )
+
+# Change this variable to alter how many datapoints to use.
+shuffle_datapoints = 10000
+dataset = shuffle_dataset( dataset, shuffle_datapoints )
+print( "Dataset has been Shuffled successfully" )
 
 # Trying to predict the class of the last 100 datapoints using the first 100,000 datapoints:
 print( "Testing our Algorithm!" )
-train_size = 10000
+
+#Change these 2 variables to play around with the number of datapoints used to train and to test.
+train_size = 9000
 test_size  = 100
+if train_size + test_size > shuffle_datapoints:
+    print( "Error!\nDataset not large enough. Increase Shuffle Threshold!" )
+
 K = int( train_size ** 0.5 )
 #K = 5
 
@@ -153,11 +187,12 @@ Y_train = classes[ : train_size ]
 #X_test = dataset[ : test_size ]
 #Y_test = classes[ : test_size ]
 #X_train = dataset[ : train_size ]
-#Y_train = dataset[ : train_size ]
+#Y_train = classes[ : train_size ]
 
 predicted_classes = [ ]
 
 # One Hot Encoding:
+print( )
 print( "One Hot Encoding Testing Data: " )
 X_test = one_hot_encoding( X_test, start_station, 1 )
 print( "Done encoding Start Station!\n" )
@@ -166,6 +201,7 @@ print( "Done encoding End Station!\n" )
 X_test = one_hot_encoding( X_test, bike_numbers, 3 )
 print( "Done encoding Bike Numbers!\n" )
 
+print( )
 print( "One Hot Encoding Training Data: " )
 X_train = one_hot_encoding( X_train, start_station, 1 )
 print( "Done encoding Start Station!\n" )
