@@ -1,10 +1,13 @@
 """
-Since this is a binary classification, use Logistic Regression
+Machine Learning Task - 
+Binary Classification of Bike Sharing Service Data, after appropriate Data Processing
+
+Using KNN With no libraries to solve the Problem
 """
 
-import time 
-import csv
-import random 
+import time    # To calculate run time
+import csv     # To import the dataset
+import random  # To shuffle the dataset
 
 start_time = time.time()
 
