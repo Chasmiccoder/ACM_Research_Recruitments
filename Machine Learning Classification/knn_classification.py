@@ -140,7 +140,7 @@ None
 # Trying to predict the class of the last 100 datapoints using the first 100,000 datapoints:
 print( "Testing our Algorithm!" )
 train_size = 10000
-test_size  = 10
+test_size  = 100
 K = int( train_size ** 0.5 )
 #K = 5
 
