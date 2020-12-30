@@ -70,7 +70,7 @@ def good_guess( letters, freq ):
     return potential_key
         
 
-def test_run( cipher, key ):
+def test_run_blank( cipher, key ):
     plain_text = ""
     for i in cipher:
         if i in key.keys( ):
@@ -139,7 +139,7 @@ This is because 'the' is the most frequent triplet in English.
 potential_key[ 'o' ] = 'h'
 letters_found.append( 'o' )
 
-message = test_run( cipher, potential_key ) # At this point we have 3 letters.
+message = test_run_blank( cipher, potential_key ) # At this point we have 3 letters.
 #print( "Test Run:\n", message )
 
 """
@@ -154,7 +154,7 @@ new_potential_key = good_guess( letters, frequency )
 #print( )
 
 # Applying new_potential_key to cipher
-plain_text = test_run( cipher, new_potential_key )
+plain_text = test_run_blank( cipher, new_potential_key )
 #print( "Is this answer correct?\n" )
 #print( plain_text )
 #print( )
@@ -212,7 +212,7 @@ potential_key[ 'm' ] = 'c'
 #potential_key[ 'r' ] = 'n'
 
 # Conducting another trial run:
-message = test_run( cipher, potential_key )
+message = test_run_blank( cipher, potential_key )
 #print( "Test Run 2: ", message )
 
 
@@ -247,12 +247,12 @@ for i in range( 0, len(cipher) ):
     else:
         doublets[ cipher[i:i+2] ] += 1
 count = list( doublets.values( ) )
-letters = list( doublets.keys( ) )
+letters_ = list( doublets.keys( ) )
 
-letters = [ x for _,x in sorted( zip( count, letters ), reverse=True ) ]
+letters_ = [ x for _,x in sorted( zip( count, letters_ ), reverse=True ) ]
 count.sort( reverse=True )
 
-doublets = dict( zip( letters, count ) )
+doublets = dict( zip( letters_, count ) )
 
 # Finding triplet frequency (to find "th")
 triplets = { }
@@ -262,12 +262,12 @@ for i in range( 0, len(cipher) ):
     else:
         triplets[ cipher[i:i+3] ] += 1
 count = list( triplets.values( ) )
-letters = list( triplets.keys( ) )
+letters_ = list( triplets.keys( ) )
 
-letters = [ x for _,x in sorted( zip( count, letters ), reverse=True ) ]
+letters_ = [ x for _,x in sorted( zip( count, letters_ ), reverse=True ) ]
 count.sort( reverse=True )
 
-triplets = dict( zip( letters, count ) )
+triplets = dict( zip( letters_, count ) )
 
 print( )
 print( "Doublets in cipher:\n", doublets )
@@ -291,6 +291,64 @@ From doublets, 'gg' and 'oo' are repeating.
 The most common double letters in English are: SS, EE, TT, FF, LL, MM, OO
 This confirms that 'o' is 't'.
 """
+
+frequency_based_key = good_guess( letters, cipher_frequency )
+print( "Frequency Based Key: ", frequency_based_key )
+print( )
+print( "Potential Key: ", potential_key )
+
+# Now we need to fuse these two:
+"""
+Frequency Based Key:  {'z': 'e', 'v': 't', 'g': 'a', 'y': 'i', 'o': 'n', 
+'j': 'o', 'i': 's', 'n': 'h', 'c': 'r', 'r': 'd', 'd': 'l', 't': 'u', 'm': 'c', 
+'f': 'm', 'x': 'f', 'q': 'w', 'p': 'y', 'b': 'g', 'a': 'p'}
+
+Potential Key:  {'z': 'e', 'v': 'a', 'o': 't', 'c': 'h'}
+
+"""
+new_potential_key =  {'z': 'e', 'v': 'a', 'y': 'i', 'o': 't', 
+'j': 'o', 'i': 's', 'n': 'h', 'c': 'h', 'r': 'd', 'd': 'l', 't': 'u', 'm': 'c', 
+'f': 'm', 'x': 'f', 'q': 'w', 'p': 'y', 'b': 'g', 'a': 'p'} # new_potential_key[ 'g' ] = ??
+
+print( )
+plain_text = test_run_blank( cipher, new_potential_key )
+print( "Plain Text using New Potential Key: \n", plain_text )
+
+"""
+Plain Text Generated:
+hl_esfe_auhteail_uagalshtthedooiasihtoseophl__hoyheasidhatewecda_meitheceda_meia_ose
+                          *                               *           *
+Noted Words:
+hate = hate
+thece = there
+
+Therefore, what gave us 'c' should have given us 'r'.
+"""
+
+new_potential_key =  {'z': 'e', 'v': 'a', 'y': 'i', 'o': 't', 
+'j': 'o', 'i': 's', 'n': 'h', 'c': 'h', 'r': 'd', 'd': 'l', 't': 'u', 'm': 'r', 
+'f': 'm', 'x': 'f', 'q': 'w', 'p': 'y', 'b': 'g', 'a': 'p'} # new_potential_key[ 'g' ] = ??
+
+print( )
+plain_text = test_run_blank( cipher, new_potential_key )
+print( "Plain Text using New Potential Key: \n", plain_text )
+
+"""
+Plain Text Generated:
+hl_esfe_auhteail_uagalshtthedooiasihtoseophl__hoyheasidhatewerda_meithereda_meia_ose
+                                                      *******
+Noted Word:
+After changing 'c' to 'r', we get -
+dhatewer = whatever
+
+change 'd' to 'w'
+change 'w' to 'v'
+"""
+new_potential_key =  {'z': 'e', 'v': 'a', 'y': 'i', 'o': 't', 
+'j': 'o', 'i': 's', 'n': 'h', 'c': 'h', 'r': 'w', 'd': 'l', 't': 'u', 'm': 'r', 
+'f': 'm', 'x': 'f', 'q': 'v', 'p': 'y', 'b': 'g', 'a': 'p'} # new_potential_key[ 'g' ] = ??
+
+
 
 
 
