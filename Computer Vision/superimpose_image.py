@@ -31,10 +31,12 @@ print(pilImage.size)
 image = cv2.imread('Image_1.png') 
   
 # BGR -> RGB 
-#img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) 
+# we receive colours in GBR format
+img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) 
 
 # Converting the image read to a numpy array
-img = np.array( image )
+img = np.array( img )
+
 
 unique_colours = [ ]
 
@@ -58,12 +60,52 @@ The RGB Code will appear at the side :P
 RGB ( 15, 27, 112 ) for the blue background.
 """
 
-for i in unique_colours:
-    #if (i[0] > 13 and i[0] < 17) and ( i[1] > 25 and i[1] < 29 ) and ( i[2] > 110 and i[2] < 114 ):
-    print( i )
+# This segment of the code removes the blue background and converts all
+# pixels with background colour to white pixels
+bg = [15,27,112]
+for i in range(len(img)):
+    
+    for pixel_index in range( len(img[i]) ):
+        pixel = img[i][pixel_index]
+        temp = pixel.tolist( )
+        if temp == bg:
+            pixel = np.array( [255,255,255] )
+            img[i][pixel_index] = pixel
+
+
+# Importing Image_2
+image_2 = cv2.imread('Image_2.jpg')
+img_2 = cv2.cvtColor(image_2, cv2.COLOR_BGR2RGB)
+img_2 = np.array( image_2 )
+
+# Comparing the shapes of these two images:
+print( "Shape of Image 1: ", img.shape )     # (1134, 1137, 3)
+print( "Shape of Image 2: ", img_2.shape )   # (498,  883,  3)
+  
+# Resizing img 1, since its resolution is bigger than necessary
+img = np.array( cv2.resize(img, (883,498), interpolation = cv2.INTER_NEAREST) ) 
+
+# Comparing the shapes of these two images again:
+print( "Shape of Image 1: ", img.shape )     # (498,  883,  3)
+print( "Shape of Image 2: ", img_2.shape )   # (498,  883,  3)
+
+"""
+for i in range( len(img_2) ):
+    for pixel_index in range( len(img_2[i]) ):
+
+        pixel = img_2[i][pixel_index]
+
+        i
+"""
+
+
+
+
 
 
 cv2.imwrite('opncv_sample.png', img)  
+
+print("Process Complete!")
 
 
 
